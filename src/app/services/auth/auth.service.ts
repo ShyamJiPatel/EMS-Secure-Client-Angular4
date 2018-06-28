@@ -3,6 +3,7 @@ import { AuthToken } from '../../model/auth/auth-token';
 import { LoginCredential } from '../../model/auth/login-credential';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 const TOKEN_NAME = "ems-auth-token";
 @Injectable({
@@ -12,23 +13,21 @@ export class AuthService {
 
   private serverURL = environment.API_URL + "token/generate-token";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
-  public login(loginCredential: LoginCredential): boolean {
+  public login(loginCredential: LoginCredential): void {
     this.http.post(this.serverURL, loginCredential).subscribe(
       res => {
         console.log(res);
         let token: any = res;
         this.saveToken(token);
-        return true;
+        this.router.navigate(['/dashboard']);
       },
       err => {
         console.log("Error occured during login");
-        return false;
       }
     );
-    return true;
   }
 
   public logout(): boolean {
@@ -42,7 +41,10 @@ export class AuthService {
 
   public getToken(): string {
     let authToken = JSON.parse(localStorage.getItem(TOKEN_NAME));
-    return authToken.token;
+    if (authToken) {
+      return authToken.token;
+    }
+    return null;
   }
 
   private deleteToken(): void {
@@ -54,5 +56,16 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  public getUserName(): string {
+    if (this.isAuthenticated) {
+      let authToken = JSON.parse(localStorage.getItem(TOKEN_NAME));
+      if (authToken) {
+        return authToken.sub;
+      } else {
+        return null;
+      }
+    }
   }
 }

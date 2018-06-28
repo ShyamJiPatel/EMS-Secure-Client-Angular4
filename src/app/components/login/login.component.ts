@@ -19,11 +19,7 @@ export class LoginComponent implements OnInit {
 
   doLogin() {
     if (this.loginCredential) {
-      if (this.authService.login(this.loginCredential)) {
-        this.router.navigate(['/dashboard']);
-      } else {
-        console.log("Successfully login");
-      }
+      this.authService.login(this.loginCredential);
     } else {
       console.log("Invalid username or password");
     }
