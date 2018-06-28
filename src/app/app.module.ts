@@ -8,6 +8,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AppRoutingModule } from './components/app-routing/app-routing.module';
+import { AuthService } from './services/auth/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth/auth-interceptor';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,10 +27,16 @@ import { AppRoutingModule } from './components/app-routing/app-routing.module';
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

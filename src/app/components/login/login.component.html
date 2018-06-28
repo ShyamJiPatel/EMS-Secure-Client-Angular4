@@ -16,12 +16,12 @@
 
           <!--Body-->
           <div class="md-form">
-            <input type="text" id="email" class="form-control" mdActive>
+            <input type="text" id="email" class="form-control" name="email" [(ngModel)]="loginCredential.email" mdActive>
             <label class="active" for="email">Email</label>
           </div>
 
           <div class="md-form pb-3">
-            <input type="text" id="pwd" class="form-control" mdActive>
+            <input type="text" id="pwd" class="form-control" name="pwd" [(ngModel)]="loginCredential.password" mdActive>
             <label class="active" for="pwd">Password</label>
             <p class="font-small blue-text d-flex justify-content-end">Forgot
               <a href="#" class="blue-text ml-1"> Password?</a>
@@ -29,7 +29,7 @@
           </div>
 
           <div class="text-center">
-            <button type="button" class="btn pink btn-block">Sign in</button>
+            <button type="button" class="btn pink btn-block" (click)="doLogin()">Sign in</button>
           </div>
           <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in with:</p>
 
@@ -62,4 +62,3 @@
     </section>
   </div>
 </div>
-
