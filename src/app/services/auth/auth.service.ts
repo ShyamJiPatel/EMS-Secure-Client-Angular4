@@ -4,6 +4,7 @@ import { LoginCredential } from '../../model/auth/login-credential';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 const TOKEN_NAME = "ems-auth-token";
 @Injectable({
@@ -13,7 +14,7 @@ export class AuthService {
 
   private serverURL = environment.API_URL + "token/generate-token";
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {
   }
 
   public login(loginCredential: LoginCredential): void {
@@ -25,7 +26,7 @@ export class AuthService {
         this.router.navigate(['/dashboard']);
       },
       err => {
-        console.log("Error occured during login");
+        this.toastr.error("Error occured during login", "Error");
       }
     );
   }

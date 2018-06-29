@@ -6,10 +6,11 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import 'rxjs/add/operator/do';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private router: Router, private authService: AuthService) { }
+    constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // Check if user login
@@ -36,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
         }, (err: any) => {
             if (err instanceof HttpErrorResponse) {
                 if (err.status === 401) {
-                    console.log("You are not authorized");
+                    this.toastr.error("You are not authorized", "UnAuthorized");
                     this.router.navigate(['/login']);
                 }
             }

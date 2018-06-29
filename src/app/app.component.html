@@ -17,7 +17,7 @@
       </ul>
       <ul class="navbar-nav mr-auto mt-lg-0" *ngIf="isLogin()">
         <li class="nav-item">
-          <span class="">Welcome &nbsp;{{userFirstName}}</span>
+          <span class="">Welcome &nbsp;{{getUserName()}}</span>
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="doLogout()" mdbWavesEffect>Logout</a>

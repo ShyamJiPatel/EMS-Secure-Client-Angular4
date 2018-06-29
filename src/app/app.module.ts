@@ -14,6 +14,7 @@ import { AuthInterceptor } from './services/auth/auth-interceptor';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './services/guard/auth.guard';
+import { CustomToastrModule } from './services/toastr/custom-toastr';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AuthGuard } from './services/guard/auth.guard';
     MDBBootstrapModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CustomToastrModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [{
