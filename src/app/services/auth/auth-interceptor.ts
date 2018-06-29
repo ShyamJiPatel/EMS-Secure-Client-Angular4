@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
             this.router.navigate(['/login']);
         }
         // Check if request is for getting JWT token
-        if (req.url.indexOf("token/generate-token") > 0) {
+        if (req.url.indexOf("token/generate-token") > 0 || req.url.indexOf("signup") > 0) {
             const headers = new HttpHeaders({
                 'Content-Type': 'application/json'
             });

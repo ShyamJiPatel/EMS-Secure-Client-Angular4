@@ -16,27 +16,32 @@
 
           <!--Body-->
           <div class="md-form pb-1">
-              <input type="text" id="name" name="name" class="form-control" mdActive>
-              <label class="active" for="name">Name</label>
-            </div>
+            <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstname" class="form-control" mdActive>
+            <label class="active" for="firstName">First Name</label>
+          </div>
 
           <div class="md-form pb-1">
-            <input type="text" id="email" name="email" class="form-control" mdActive>
+            <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastname" class="form-control" mdActive>
+            <label class="active" for="lastName">Last Name</label>
+          </div>
+
+          <div class="md-form pb-1">
+            <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" mdActive>
             <label class="active" for="email">Email</label>
           </div>
 
           <div class="md-form pb-1">
-            <input type="text" id="pwd"  name="pwd" class="form-control" mdActive>
+            <input type="password" id="pwd" name="pwd" [(ngModel)]="user.password" class="form-control" mdActive>
             <label class="active" for="pwd">Password</label>
           </div>
 
           <div class="md-form pb-1">
-              <input type="text" id="repwd"  name="repwd" class="form-control" mdActive>
-              <label class="active" for="repwd">Re-Enter Password</label>
-            </div>
+            <input type="password" id="repwd" name="repwd" [(ngModel)]="user.repassword" class="form-control" mdActive>
+            <label class="active" for="repwd">Re-Enter Password</label>
+          </div>
 
           <div class="text-center mb-3">
-            <button type="button" class="btn pink btn-block">Sign up</button>
+            <button type="button" class="btn pink btn-block" (click)="doSignup()">Sign up</button>
           </div>
 
           <!--Footer-->
